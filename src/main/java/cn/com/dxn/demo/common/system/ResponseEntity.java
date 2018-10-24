@@ -6,6 +6,9 @@ import lombok.Data;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author richard
+ */
 @Data
 @AllArgsConstructor
 public class ResponseEntity {
@@ -13,7 +16,7 @@ public class ResponseEntity {
     private List<String> messages;
     private Object data;
 
-    public static ResponseEntity create(Object data) {
+    public static ResponseEntity ok(Object data) {
         return new ResponseEntity(200, Collections.singletonList("success"), data);
     }
 

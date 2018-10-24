@@ -30,12 +30,12 @@ public class UserServiceTest {
     @Test
     public void getAllUsersTest() {
         User user1 = new User();
-        user1.setUserName("user1");
+        user1.setUsername("user1");
         user1.setPassword("123456");
         user1.setMemo("memo1");
 
         User user2 = new User();
-        user2.setUserName("user2");
+        user2.setUsername("user2");
         user2.setPassword("123456");
         user2.setMemo("memo2");
 
@@ -48,15 +48,15 @@ public class UserServiceTest {
     public void saveUserTest() {
         User user1 = new User();
         user1.setId(1);
-        user1.setUserName("user1");
+        user1.setUsername("user1");
         user1.setPassword("123456");
         user1.setMemo("memo1");
         Mockito.when(userRepository.save(user1)).thenReturn(user1);
 
-        Mockito.when(userRepository.findByUserName(user1.getUserName())).thenReturn(null);
+        Mockito.when(userRepository.findByUsername(user1.getUsername())).thenReturn(null);
         assertEquals(userService.saveUser(user1), user1);
 
-        Mockito.when(userRepository.findByUserName(user1.getUserName())).thenReturn(user1);
+        Mockito.when(userRepository.findByUsername(user1.getUsername())).thenReturn(user1);
         thrown.expect(ValidationException.class);
         userService.saveUser(user1);
     }

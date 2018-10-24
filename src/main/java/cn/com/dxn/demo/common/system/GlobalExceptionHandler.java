@@ -5,6 +5,7 @@ import cn.com.dxn.demo.common.exception.LoginFailedException;
 import cn.com.dxn.demo.common.exception.NotFoundException;
 import cn.com.dxn.demo.common.exception.ValidationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.Collections;
 
+/**
+ * @author richard
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -31,7 +35,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(LoginFailedException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     @ResponseBody
     public ResponseEntity loginException(LoginFailedException e) {
         return e.getResponseEntity();
@@ -49,5 +53,12 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseEntity notFoundException(NotFoundException e) {
         return e.getResponseEntity();
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    public ResponseEntity badCredentialsException(BadCredentialsException e) {
+        return new ResponseEntity(HttpStatus.UNAUTHORIZED.value(), Collections.singletonList("用户名密码错误！"), null);
     }
 }

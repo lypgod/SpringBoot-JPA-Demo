@@ -21,6 +21,6 @@ public class LoginFailedException extends RuntimeException {
     }
 
     public ResponseEntity getResponseEntity() {
-        return ResponseEntity.create(HttpStatus.BAD_REQUEST.value(), messages, null);
+        return ResponseEntity.create(HttpStatus.UNAUTHORIZED.value(), messages, null);
     }
 }

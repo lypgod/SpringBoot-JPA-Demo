@@ -33,13 +33,13 @@ public class UserControllerTest {
     public void getAllUsersTest() throws Exception {
         User user1 = new User();
         user1.setId(1);
-        user1.setUserName("user1");
+        user1.setUsername("user1");
         user1.setPassword("123456");
         user1.setMemo("memo1");
 
         User user2 = new User();
         user2.setId(2);
-        user2.setUserName("user2");
+        user2.setUsername("user2");
         user2.setPassword("123456");
         user2.setMemo("memo2");
 

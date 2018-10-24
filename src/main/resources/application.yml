@@ -22,11 +22,17 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       connection-test-query: SELECT 1
-  mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
 
 logging:
   level:
     cn.com.dxn: debug
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 3600
+  tokenHead: Bearer
+  route.authentication:
+    path: "auth/login"
+    refresh: "auth/refresh"
+    register: "auth/register"
