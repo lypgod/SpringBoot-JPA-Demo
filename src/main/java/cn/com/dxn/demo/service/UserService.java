@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author richard
@@ -40,11 +39,7 @@ public class UserService {
     }
 
     public User updateUser(Integer id, User modifiedUser) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        if (!optionalUser.isPresent()) {
-            throw new NotFoundException("用户不存在！");
-        }
-        User userToUpdate = optionalUser.get();
+        User userToUpdate = userRepository.findById(id).orElseThrow(() -> new NotFoundException("用户不存在！"));
 
         if (!modifiedUser.getUsername().equals(userToUpdate.getUsername())) {
             if (userRepository.findByUsername(modifiedUser.getUsername()) != null) {
